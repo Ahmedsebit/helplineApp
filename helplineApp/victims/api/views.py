@@ -1,14 +1,18 @@
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.permissions import BasePermission, IsAuthenticated, IsAdminUser
+
 from django.db.models import Q
 from victims.models import Victim
-# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .serializers import VictimModelSerializer, VictimModelUpdateSerializer
 
+from users.permissions import IsAllowedToAddVictims
 class VictimApiListView(generics.ListAPIView):
 
     serializer_class = VictimModelSerializer
+
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddVictims]
 
     def get_queryset(self, *args, **kwargs):
         qs = Victim.objects.all()
@@ -44,24 +48,24 @@ class VictimApiListView(generics.ListAPIView):
 class VictimAPICreateView(generics.CreateAPIView):
 
     serializer_class = VictimModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddVictims]
 
 
 class VictimApiDetailView(generics.RetrieveAPIView):
 
-    queryset = Victim.objects.all()
     serializer_class = VictimModelSerializer
-
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddVictims]
+    queryset = Victim.objects.all()
 
 class VictimApiDestroyView(generics.DestroyAPIView):
 
-    queryset = Victim.objects.all()
     serializer_class = VictimModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddVictims]
+    queryset = Victim.objects.all()
 
 
 class VictimApiUpdateView(generics.UpdateAPIView):
 
-    queryset = Victim.objects.all()
     serializer_class = VictimModelUpdateSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddVictims]
+    queryset = Victim.objects.all()

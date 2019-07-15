@@ -5,12 +5,14 @@ from incidences.models import Incidence
 # from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .serializers import IncidenceModelSerializer, IncidenceModelUpdateSerializer
-
+from users.permissions import IsAllowedToAddIncidences
 class IncidenceApiListView(generics.ListAPIView):
 
     serializer_class = IncidenceModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddIncidences]
 
     def get_queryset(self, *args, **kwargs):
+        
         qs = Incidence.objects.all()
 
         peritraumatic_fear = self.request.GET.get('peritraumatic_fear', None)
@@ -22,8 +24,7 @@ class IncidenceApiListView(generics.ListAPIView):
         prior_rape_history = self.request.GET.get('prior_rape_history', None)
         history_of_previous_rape = self.request.GET.get('history_of_previous_rape', None)
         investigator = self.request.GET.get('investigator', None)
-        
-
+    
         if peritraumatic_fear is not None:
             qs = qs.filter(
                 Q(peritraumatic_fear__icontains=peritraumatic_fear) 
@@ -66,24 +67,25 @@ class IncidenceApiListView(generics.ListAPIView):
 class IncidenceAPICreateView(generics.CreateAPIView):
 
     serializer_class = IncidenceModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddIncidences]
 
 
 class IncidenceApiDetailView(generics.RetrieveAPIView):
 
-    queryset = Incidence.objects.all()
     serializer_class = IncidenceModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddIncidences]
+    queryset = Incidence.objects.all()
 
 
 class IncidenceApiDestroyView(generics.DestroyAPIView):
 
-    queryset = Incidence.objects.all()
     serializer_class = IncidenceModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddIncidences]
+    queryset = Incidence.objects.all()
 
 
 class IncidenceApiUpdateView(generics.UpdateAPIView):
 
-    queryset = Incidence.objects.all()
     serializer_class = IncidenceModelUpdateSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddIncidences]
+    queryset = Incidence.objects.all()

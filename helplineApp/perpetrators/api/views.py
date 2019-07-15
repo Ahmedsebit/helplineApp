@@ -5,10 +5,11 @@ from perpetrators.models import Perpetrator
 # from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .serializers import PerpetratorModelSerializer, PerpetratorModelUpdateSerializer
-
+from users.permissions import IsAllowedToAddPerpetrators
 class PerpetratorApiListView(generics.ListAPIView):
 
     serializer_class = PerpetratorModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddPerpetrators]
 
     def get_queryset(self, *args, **kwargs):
         qs = Perpetrator.objects.all()
@@ -44,24 +45,26 @@ class PerpetratorApiListView(generics.ListAPIView):
 class PerpetratorAPICreateView(generics.CreateAPIView):
 
     serializer_class = PerpetratorModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddPerpetrators]
+    queryset = Perpetrator.objects.all()
 
 
 class PerpetratorApiDetailView(generics.RetrieveAPIView):
 
-    queryset = Perpetrator.objects.all()
     serializer_class = PerpetratorModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddPerpetrators]
+    queryset = Perpetrator.objects.all()
 
 
 class PerpetratorApiDestroyView(generics.DestroyAPIView):
 
-    queryset = Perpetrator.objects.all()
     serializer_class = PerpetratorModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddPerpetrators]
+    queryset = Perpetrator.objects.all()
 
 
 class PerpetratorApiUpdateView(generics.UpdateAPIView):
 
+    serializer_class = PerpetratorModelUpdateSerializer  
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddPerpetrators]
     queryset = Perpetrator.objects.all()
-    serializer_class = PerpetratorModelUpdateSerializer
-    # permission_classes = [permissions.IsAdminUser]

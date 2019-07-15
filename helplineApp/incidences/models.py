@@ -45,6 +45,7 @@ class Incidence(models.Model):
         (NO, 'no'),
     ]
 
+    reported_case = models.ForeignKey(Report, on_delete=models.CASCADE, null=True)
     peritraumatic_fear = models.CharField(
         max_length=2,
         choices=PERITRAUMATIC_FEAR,
@@ -85,10 +86,12 @@ class Incidence(models.Model):
         choices=HISTORY_OF_PREVIOUS_RAPE,
         default=NO,
     )
+    victim = models.ForeignKey(Victim, on_delete=models.CASCADE, null=False)
+    perpetrator = models.ForeignKey(Perpetrator, on_delete=models.CASCADE, null=False)
     investigator = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
-    # def __str__ (self):
-    #     return str(self.investigator)
+    def __str__ (self):
+        return str(self.victim.first_name)
 
     # def get_absolute_url(self):
     #     return u'/incidences/%d/' % self.investigator

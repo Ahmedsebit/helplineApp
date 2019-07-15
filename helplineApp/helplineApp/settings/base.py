@@ -43,9 +43,17 @@ INSTALLED_APPS = [
     'reports'
     'incidences',
     'users',
+    'django_nose',
 
     'rest_framework',
     'rest_framework.authtoken',
+]
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=users,cases,incidences,perpetrators,victims,reports'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +149,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

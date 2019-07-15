@@ -7,11 +7,12 @@ from rest_framework import permissions
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .serializers import CaseModelSerializer, CaseModelUpdateSerializer
-
+from users.permissions import IsAllowedToAddCases
 class CaseApiListView(generics.ListAPIView):
 
-    authentication_classes = (JSONWebTokenAuthentication, )
+    # authentication_classes = (JSONWebTokenAuthentication, )
     serializer_class = CaseModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddCases]
 
     def get_queryset(self, *args, **kwargs):
         qs = Case.objects.all()
@@ -66,29 +67,30 @@ class CaseApiListView(generics.ListAPIView):
 
 class CaseAPICreateView(generics.CreateAPIView):
 
-    authentication_classes = (JSONWebTokenAuthentication, )
+    # authentication_classes = (JSONWebTokenAuthentication, )
     serializer_class = CaseModelSerializer
-    # permission_classes = [permissions.IsInvestigator]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddCases]
 
 
 class CaseApiDetailView(generics.RetrieveAPIView):
 
-    authentication_classes = (JSONWebTokenAuthentication, )
-    queryset = Case.objects.all()
+    # authentication_classes = (JSONWebTokenAuthentication, )
     serializer_class = CaseModelSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddCases]
+    queryset = Case.objects.all()
 
 
 class CaseApiDestroyView(generics.DestroyAPIView):
 
-    authentication_classes = (JSONWebTokenAuthentication, )
-    queryset = Case.objects.all()
+    # authentication_classes = (JSONWebTokenAuthentication, )
     serializer_class = CaseModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddCases]
+    queryset = Case.objects.all()
 
 
 class CaseApiUpdateView(generics.UpdateAPIView):
 
-    authentication_classes = (JSONWebTokenAuthentication, )
-    queryset = Case.objects.all()
+    # authentication_classes = (JSONWebTokenAuthentication, )
     serializer_class = CaseModelUpdateSerializer
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddCases]
+    queryset = Case.objects.all()

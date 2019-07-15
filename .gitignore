@@ -1,7 +1,8 @@
 # project/doctor_referral/__pycache__/*
 # project/doctor_referral/migrations/*
 *.__pycache__
-
+.DS_Store
+.coverage
 *.pyc
 db.sqlite3
 development.py

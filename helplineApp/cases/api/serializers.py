@@ -8,15 +8,14 @@ class CaseModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Case
         fields = [
-            'victim',
-            'perpetrator',
-            'reported_case',
+            'incidence',
             'location',
             'reported_to',
             'case_no',
             'lawyer',
             'police_station',
-            'court'
+            'court',
+            'user'
         ]
 
 class CaseModelUpdateSerializer(serializers.ModelSerializer):
@@ -24,13 +23,12 @@ class CaseModelUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Case
         fields = [
-            'victim',
-            'perpetrator',
-            'reported_case',
+            'incidence',
             'location',
             'reported_to',
             'case_no',
             'lawyer',
             'police_station',
-            'court'
+            'court',
+            'user'
         ]

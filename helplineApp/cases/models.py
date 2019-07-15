@@ -7,10 +7,7 @@ from users.models import User
 
 # Create your models here.
 class Case(models.Model):
-    victim = models.ForeignKey(Victim, on_delete=models.CASCADE, null=False)
-    perpetrator = models.ForeignKey(Perpetrator, on_delete=models.CASCADE, null=False)
-    incidence = models.ForeignKey(Incidence, on_delete=models.CASCADE, null=True)
-    reported_case = models.ForeignKey(Report, on_delete=models.CASCADE, null=False)
+    incidence = models.ForeignKey(Incidence, on_delete=models.CASCADE, null=False)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     location = models.CharField(max_length=20)
     reported_to = models.CharField(max_length=20)
@@ -20,8 +17,8 @@ class Case(models.Model):
     court = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
-    class Meta:
-        unique_together = (('victim','reported_case'),('reported_case','perpetrator'),('victim','incidence'))
+    # class Meta:
+    #     unique_together = (('victim','reported_case'),('reported_case','perpetrator'),('victim','incidence'))
 
     # def __str__ (self):
     #     return str(self.ref)

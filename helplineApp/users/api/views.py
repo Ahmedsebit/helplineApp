@@ -16,13 +16,9 @@ class UserApiCreateView(generics.CreateAPIView):
 
     serializer_class = UserDisplaySerializer
 
-    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddUsers, permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, IsAllowedToAddUsers]
     # authentication_classes = (JSONWebTokenAuthentication, )
     
-# class UserApiListView(generics.ListCreateAPIView):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
-
 
 class UserApiDetailListView(generics.ListAPIView):
 
@@ -42,23 +38,30 @@ class UserApiDetailListView(generics.ListAPIView):
 
 
 class CustomUserApiDetailView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
+
     serializer_class = UserSerializer
+    
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JSONWebTokenAuthentication, )
-
+    
+    queryset = User.objects.all()
+    
 
 class CustomUserApiDestroyView(generics.DestroyAPIView):
-    queryset = User.objects.all()
+
     serializer_class = UserSerializer
+    
     permission_classes = [permissions.IsAuthenticated]
 
+    queryset = User.objects.all()
+    
 
 class UserApiUpdateView(generics.UpdateAPIView):
 
     serializer_class = UserUpdateSerializer
-    
+
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JSONWebTokenAuthentication, )
 
     queryset = User.objects.all()
+    

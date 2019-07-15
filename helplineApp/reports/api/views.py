@@ -1,14 +1,20 @@
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import BasePermission, IsAuthenticated, IsAdminUser
+
 from django.db.models import Q
 from reports.models import Report
 # from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .serializers import ReportModelSerializer, ReportModelUpdateSerializer
 
+
 class ReportApiListView(generics.ListAPIView):
 
     serializer_class = ReportModelSerializer
+
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
         qs = Report.objects.all()
@@ -39,19 +45,18 @@ class ReportAPICreateView(generics.CreateAPIView):
 
 class ReportApiDetailView(generics.RetrieveAPIView):
 
-    queryset = Report.objects.all()
     serializer_class = ReportModelSerializer
 
-
-class ReportApiDestroyView(generics.DestroyAPIView):
-
-    queryset = Report.objects.all()
-    serializer_class = ReportModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
-
-
-class ReportApiUpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
 
     queryset = Report.objects.all()
-    serializer_class = ReportModelUpdateSerializer
-    # permission_classes = [permissions.IsAdminUser]
+
+
+# class ReportApiDestroyView(generics.DestroyAPIView):
+
+#     serializer_class = ReportModelSerializer
+
+#     permission_classes = [permissions.IsAuthenticated]
+
+#     queryset = Report.objects.all()
+

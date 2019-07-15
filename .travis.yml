@@ -6,8 +6,8 @@ env:
 - DJANGO_SETTINGS_MODULE='helplineApp.settings.development'
 # install dependencies
 install:
-- pip install -r requirements.txt
+- pip install -r helpline/requirements.txt
 
 # run test scripts
 script:
-- python src/manage.py test 
+- python helplineApp/manage.py test 

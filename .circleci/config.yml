@@ -20,7 +20,7 @@ jobs:
           name: Running tests
           command: |
             . venv/bin/activate
-            python3 helplineApp/manage.py tests.py
+            python3 helplineApp/manage.py tests
       - store_artifacts:
           path: test-reports/
           destination: python_app

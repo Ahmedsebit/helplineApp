@@ -14,7 +14,7 @@ class SMS:
 
     def fetch_sms_sync(self):
         try:
-            last_received_id = 0
+            last_received_id = os.environ.get('LAST_RECEIVED')
             while True:
                 MessageData = self.sms.fetch_messages(last_received_id)
                 messages = MessageData['SMSMessageData']['Messages']

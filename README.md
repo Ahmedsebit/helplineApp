@@ -36,8 +36,12 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 
 ### 8)Create Super User
-
 $ python manage.py createsuperuser
+
+### 7)Add the environment variables
+$ export AFRICAS_TALKING_USERNAME = "THE USERNAME"
+$ export AFRICAS_TALKING_API_KEY=“THEAPI_KEY"
+$ export LAST_RECEIVED=0
 
 # Runserver
 $ python manage.py runserver

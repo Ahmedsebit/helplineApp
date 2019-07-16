@@ -86,7 +86,5 @@ $ python manage.py createsuperusers
 | `/api/Users/<user_id>/update`        |`PUT`   | Update User Details  |
 | `/api/Users/<user_id>/`              |`DELETE`| DELETE User          |
 
-            |`GET`   | Get customet payment    |
-
 # Running the tests
  $ python manage.py test --with-coverage

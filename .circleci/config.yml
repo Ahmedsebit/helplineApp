@@ -20,9 +20,11 @@ jobs:
           name: Running tests
           command: |
             . venv/bin/activate
-            export AFRICAS_TALKING_USERNAME=sandbox
+
+            export AFRICAS_TALKING_USERNAME="sandbox"
             export AFRICAS_TALKING_API_KEY=“4d7fe2e79fb7871d5c5e24fdc051088ebb74ec6ed5613b44d2749c61a5cb8078"
             export LAST_RECEIVED=0
+            
             python3 helplineApp/manage.py test
       - store_artifacts:
           path: test-reports/

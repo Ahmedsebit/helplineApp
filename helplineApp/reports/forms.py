@@ -8,5 +8,6 @@ class ReportModelForm(forms.ModelForm):
         fields = [
             'info',
             'report_date',
-            'case_opened'
+            'case_opened',
+            'message_from'
         ]

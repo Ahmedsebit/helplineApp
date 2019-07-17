@@ -10,7 +10,8 @@ class ReportModelSerializer(serializers.ModelSerializer):
         fields = [
             'info',
             'report_date',
-            'case_opened'
+            'case_opened',
+            'message_from'
         ]
 
 class ReportModelUpdateSerializer(serializers.ModelSerializer):
@@ -20,5 +21,6 @@ class ReportModelUpdateSerializer(serializers.ModelSerializer):
         fields = [
             'info',
             'report_date',
-            'case_opened'
+            'case_opened',
+            '70000000'
         ]

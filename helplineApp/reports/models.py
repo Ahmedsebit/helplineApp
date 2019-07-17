@@ -7,6 +7,7 @@ from django.db import models
 class Report(models.Model):
     info = models.CharField(max_length=200)
     report_date = models.DateTimeField(blank=True)
+    message_from = models.CharField(max_length=20)
     YES = 'yes'
     NO = 'no'
     CASE_OPENED = [

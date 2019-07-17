@@ -27,7 +27,8 @@ class ReportModelTest(TestCase):
         self.report = Report.objects.create(
                         info = 'testing',
                         report_date = '2019-11-02T00:00:00+05:00',
-                        case_opened = 'no'
+                        case_opened = 'no',
+                        message_from = '70000000'
                     )
         self.user = User.objects.create_user(
             "test_username",
@@ -40,11 +41,12 @@ class ReportModelTest(TestCase):
         self.client.force_authenticate(user=self.user)
 
 
-    def create_report(self, info, report_date, case_opened):
+    def create_report(self, info, report_date, case_opened, message_from):
         return Report.objects.create(
                                 info = info,
                                 report_date = report_date,
-                                case_opened = case_opened
+                                case_opened = case_opened,
+                                message_from = message_from
                                 )
 
 
@@ -52,7 +54,8 @@ class ReportModelTest(TestCase):
         r = self.create_report(
                             'testing',
                             '2019-11-02T00:00:00+05:00',
-                            'no'
+                            'no',
+                            '70000000'
                         )
         self.assertTrue(isinstance(r, Report))
         self.assertTrue(r.info =="testing")
@@ -65,7 +68,8 @@ class ReportModelTest(TestCase):
             self.create_report(
                             'testing',
                             '2019-11-02T00:00:00+05:00',
-                            'yes'
+                            'yes',
+                            '70000000'
                         ).full_clean()
 
     
@@ -74,7 +78,8 @@ class ReportModelTest(TestCase):
             self.create_report(
                             'testing',
                             '2010-11-02T00:00:00+05:00',
-                            'no'
+                            'no',
+                            '70000000'
                         ).full_clean()
 
 
@@ -88,7 +93,8 @@ class ReportModelTest(TestCase):
                                     json.dumps({
                                         'info':'testing',
                                         'report_date':'2019-11-02T00:00:00+05:00',
-                                        'case_opened':'no'
+                                        'case_opened':'no',
+                                        'message_from':'70000000'
                                         }),
                                     content_type='application/json'
                                     )

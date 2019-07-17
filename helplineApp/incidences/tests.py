@@ -26,11 +26,6 @@ class ReportModelTest(TestCase):
 
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.report = Report.objects.create(
-                        info = 'testing',
-                        report_date = '2019-11-02T00:00:00+05:00',
-                        case_opened = 'no'
-                    )
         self.user = User.objects.create_user(
             "test_username",
             "test_email@email.com",
@@ -72,7 +67,8 @@ class ReportModelTest(TestCase):
         self.report = Report.objects.create(
                         info = 'testing',
                         report_date = '2019-11-02T00:00:00+05:00',
-                        case_opened = 'no'
+                        case_opened = 'no',
+                        message_from = '70000000'
                     )
 
         self.client = APIClient()

@@ -40,7 +40,6 @@ class ReportApiListView(generics.ListAPIView):
 class ReportAPICreateView(generics.CreateAPIView):
 
     serializer_class = ReportModelSerializer
-    # permission_classes = [permissions.IsAdminUser]
 
 
 class ReportApiDetailView(generics.RetrieveAPIView):
@@ -51,12 +50,4 @@ class ReportApiDetailView(generics.RetrieveAPIView):
 
     queryset = Report.objects.all()
 
-
-# class ReportApiDestroyView(generics.DestroyAPIView):
-
-#     serializer_class = ReportModelSerializer
-
-#     permission_classes = [permissions.IsAuthenticated]
-
-#     queryset = Report.objects.all()
 
